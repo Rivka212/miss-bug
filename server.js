@@ -14,8 +14,8 @@ app.get('/api/bug', (req, res) => {
     bugService.query()
         .then(bugs => res.send(bugs))
     .catch(err => {
-        loggerService.error(`Couldn't get cars...`)
-        res.status(500).send(`Couldn't get cars...`)
+        loggerService.error(`Couldn't get bugs...`)
+        res.status(500).send(`Couldn't get bugs...`)
     })
 })
 

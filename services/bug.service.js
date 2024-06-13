@@ -7,14 +7,14 @@ export const bugService = {
     getById,
     remove,
     save,
-    getEmptyBug,
-    getDefaultFilter,
+    // getEmptyBug,
+    // getDefaultFilter,
 }
 
 var bugs = utilService.readJsonFile('./data/bug.json')
 
 function query() {
-   return Promise.resolve(bags)
+   return Promise.resolve(bugs)
 }
 
 

@@ -13,10 +13,10 @@ app.use(cookieParser())
 app.get('/api/bug', (req, res) => {
     bugService.query()
         .then(bugs => res.send(bugs))
-    .catch(err => {
-        loggerService.error(`Couldn't get bugs...`)
-        res.status(500).send(`Couldn't get bugs...`)
-    })
+        .catch(err => {
+            loggerService.error(`Couldn't get bugs...`)
+            res.status(500).send(`Couldn't get bugs...`)
+        })
 })
 
 
@@ -30,9 +30,15 @@ app.get('/api/bug/save', (req, res) => {
 
 app.get('/api/bug/:id', (req, res) => {
     const { id } = req.params
+    var visitedBugs = req.cookies.visitedBugs || []
+    if (visitedBugs.length >= 3) res.status(401).send('bug limit reached')
+    if (!visitedBugs.includes(id)) visitedBugs.push(id)
+    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
+
     bugService.getById(id)
         .then(bug => res.send(bug))
 })
+
 
 app.get('/api/bug/:id/remove', (req, res) => {
     const { id } = req.params
@@ -40,10 +46,6 @@ app.get('/api/bug/:id/remove', (req, res) => {
         .then(() => res.send(`Bug ${id} deleted...`))
 })
 
-
-// app.get('/api/bug', (req, res) => res.send(bugs))
-// app.listen(3030, () => console.log('Server ready at 3030'))
-// app.listen(3030, () => loggerService.info(`Server listening on port 3030`))
 
 const port = 3030
 app.listen(3030, () => loggerService.info(`Server listening on port http://127.0.0.1:${port}/`))

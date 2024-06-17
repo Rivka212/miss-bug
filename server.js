@@ -31,7 +31,9 @@ app.get('/api/bug/save', (req, res) => {
 app.get('/api/bug/:id', (req, res) => {
     const { id } = req.params
     var visitedBugs = req.cookies.visitedBugs || []
-    if (visitedBugs.length >= 3) res.status(401).send('bug limit reached')
+    if (visitedBugs.length >= 3) res.status(401).send('Wait for a bit')
+    // console.log(`User visited at the following bugs: ${req.cookies}`)
+
     if (!visitedBugs.includes(id)) visitedBugs.push(id)
     res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
 

@@ -1,22 +1,30 @@
 import { bugService } from '../services/bug.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { BugList } from '../cmps/BugList.jsx'
+import { BugFilter } from "../cmps/BugFilter.jsx"
 
 const { useState, useEffect } = React
 
 export function BugIndex() {
   const [bugs, setBugs] = useState([])
-  // const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
+  const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
 
 
   useEffect(() => {
+    console.log(filterBy)
     loadBugs()
-  }, [])
+  }, [filterBy])
 
   function loadBugs() {
     console.log('hi');
     bugService.query().then(setBugs)
   }
+
+//   useEffect(() => {
+//     bugService.query(filterBy)
+//         .then(bugs => setBugs(bugs))
+//         .catch(err => console.log('err:', err))
+// }, [filterBy])
 
   function onRemoveBug(bugId) {
     bugService
@@ -36,7 +44,7 @@ export function BugIndex() {
     const bug = {
       title: prompt('Bug title?'),
       severity: +prompt('Bug severity?'),
-      description: +prompt('New description?')
+      description: prompt('New description?')
     }
     bugService
       .save(bug)
@@ -69,11 +77,19 @@ export function BugIndex() {
       })
   }
 
+
+  function onSetFilterBy(filterBy) {
+    setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+}
+
+
+
   if (!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>
       <main>
+        <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
         <button onClick={onAddBug}>Add Bug ⛐</button>
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
       </main>

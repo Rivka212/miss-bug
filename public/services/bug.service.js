@@ -16,16 +16,16 @@ function query(filterBy = {}) {
     console.log('query in front');
     return axios.get(BASE_URL)
         .then(res => res.data)
-        // .then(bugs => {
-            // if (filterBy.txt) {
-            //     const regExp = new RegExp(filterBy.txt, 'i')
-            //     bugs = bugs.filter(bug => regExp.test(bug.vendor))
-            // }
-            // if (filterBy.minSpeed) {
-            //     bugs = bugs.filter(bug => bug.speed >= filterBy.minSpeed)
-            // }
-            // return bugs
-        // })
+    .then(bugs => {
+    if (filterBy.title) {
+        const regExp = new RegExp(filterBy.title, 'i')
+        bugs = bugs.filter(bug => regExp.test(bug.title))
+    }
+    if (filterBy.minSeverity) {
+        bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+    }
+    return bugs
+    })
 }
 
 
@@ -48,12 +48,9 @@ function save(bug) {
 
 function getEmptyBug(title = '', description = '', severity = '', createdAt = '') {
     return { title, description, severity, createdAt }
-    // return { vendor, speed }
 }
 
 function getDefaultFilter() {
-    return { title: '', description: '', severity: '', createdAt: '' }
-    // return { txt: '':'', minSpeed: '' }
+    return { title: '', minSeverity: 0, }
 }
-
 

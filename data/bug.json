@@ -26,5 +26,12 @@
     "description": "NaN",
     "severity": 7,
     "createdAt": null
+  },
+  {
+    "_id": "OqI8u",
+    "title": "null",
+    "description": "null",
+    "severity": 0,
+    "createdAt": null
   }
 ]

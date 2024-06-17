@@ -13,7 +13,7 @@ export const bugService = {
 // `http://127.0.0.1:3030/api/bug`
 
 function query(filterBy = {}) {
-    // console.log('query in front');
+    console.log('query in front');
     return axios.get(BASE_URL)
         .then(res => res.data)
         // .then(bugs => {
@@ -36,11 +36,11 @@ function getById(bugId) {
 
 function remove(bugId) {
     return axios.get(BASE_URL + '/' + bugId + '/remove')
-        .then(res => console.log(res.data))
+        .then(res => res.data)
 }
 
 function save(bug) {
-    const queryStr = `/save?title=${bug.title}&description=${bug.description}severity=${bug.severity}
+    const queryStr = `/save?title=${bug.title}&description=${bug.description}&severity=${bug.severity}
     &createdAt=${bug.createdAt}&_id=${bug._id || ''}`
     return axios.get(BASE_URL + queryStr)
         .then(res => res.data)

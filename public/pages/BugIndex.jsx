@@ -36,6 +36,7 @@ export function BugIndex() {
     const bug = {
       title: prompt('Bug title?'),
       severity: +prompt('Bug severity?'),
+      description: +prompt('New description?')
     }
     bugService
       .save(bug)
@@ -68,7 +69,7 @@ export function BugIndex() {
       })
   }
 
-  if(!bugs || !bugs.length) return (<h2>Loading...</h2>)
+  if (!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>

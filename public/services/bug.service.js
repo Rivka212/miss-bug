@@ -1,7 +1,4 @@
 
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-
 const BASE_URL = '/api/bug'
 
 export const bugService = {
@@ -13,10 +10,13 @@ export const bugService = {
     getDefaultFilter,
 }
 
+// `http://127.0.0.1:3030/api/bug`
+
 function query(filterBy = {}) {
+    // console.log('query in front');
     return axios.get(BASE_URL)
         .then(res => res.data)
-        .then(bugs => {
+        // .then(bugs => {
             // if (filterBy.txt) {
             //     const regExp = new RegExp(filterBy.txt, 'i')
             //     bugs = bugs.filter(bug => regExp.test(bug.vendor))
@@ -24,8 +24,8 @@ function query(filterBy = {}) {
             // if (filterBy.minSpeed) {
             //     bugs = bugs.filter(bug => bug.speed >= filterBy.minSpeed)
             // }
-            return bugs
-        })
+            // return bugs
+        // })
 }
 
 
@@ -36,7 +36,7 @@ function getById(bugId) {
 
 function remove(bugId) {
     return axios.get(BASE_URL + '/' + bugId + '/remove')
-        .then(res => res.data)
+        .then(res => console.log(res.data))
 }
 
 function save(bug) {

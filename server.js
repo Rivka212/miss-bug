@@ -43,5 +43,10 @@ app.get('/api/bug/:id/remove', (req, res) => {
 
 // app.get('/api/bug', (req, res) => res.send(bugs))
 // app.listen(3030, () => console.log('Server ready at 3030'))
-app.listen(3030, () => loggerService.info(`Server listening on port 3030`))
+// app.listen(3030, () => loggerService.info(`Server listening on port 3030`))
+
+const port = 3030
+app.listen(3030, () => loggerService.info(`Server listening on port http://127.0.0.1:${port}/`))
+
+
 

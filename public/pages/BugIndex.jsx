@@ -6,12 +6,15 @@ const { useState, useEffect } = React
 
 export function BugIndex() {
   const [bugs, setBugs] = useState([])
+  // const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
+
 
   useEffect(() => {
     loadBugs()
   }, [])
 
   function loadBugs() {
+    console.log('hi');
     bugService.query().then(setBugs)
   }
 
@@ -65,6 +68,7 @@ export function BugIndex() {
       })
   }
 
+  if(!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>

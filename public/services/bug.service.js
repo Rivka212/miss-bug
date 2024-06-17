@@ -12,20 +12,18 @@ export const bugService = {
 
 // `http://127.0.0.1:3030/api/bug`
 
-function query(filterBy = {}) {
-    console.log('query in front');
-    return axios.get(BASE_URL)
-        .then(res => res.data)
-    .then(bugs => {
-    if (filterBy.title) {
-        const regExp = new RegExp(filterBy.title, 'i')
-        bugs = bugs.filter(bug => regExp.test(bug.title))
-    }
-    if (filterBy.minSeverity) {
-        bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
-    }
-    return bugs
-    })
+function query(filterBy) {
+    const { txt, minSeverity } = filterBy
+    return axios.get(`${BASE_URL}?minSeverity=${minSeverity}&txt=${txt}`).then(res => res.data)
+    // if (filterBy.txt) {
+    //     const regExp = new RegExp(filterBy.txt, 'i')
+    //     bugs = bugs.filter(bug => regExp.test(bug.txt))
+    // }
+    // if (filterBy.minSeverity) {
+    //     bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+    // }
+    // return bugs
+    // })
 }
 
 
@@ -51,6 +49,6 @@ function getEmptyBug(title = '', description = '', severity = '', createdAt = ''
 }
 
 function getDefaultFilter() {
-    return { title: '', minSeverity: 0, }
+    return { txt: '', minSeverity: 0, }
 }
 

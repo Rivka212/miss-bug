@@ -11,7 +11,8 @@ app.use(cookieParser())
 
 
 app.get('/api/bug', (req, res) => {
-    bugService.query()
+    const { txt, minSeverity } = req.query
+    bugService.query({ txt, minSeverity: +minSeverity })
         .then(bugs => res.send(bugs))
         .catch(err => {
             loggerService.error(`Couldn't get bugs...`)

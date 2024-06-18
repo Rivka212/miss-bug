@@ -80,13 +80,16 @@ export function BugIndex() {
     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
   }
 
-
+function onDownloadPdf(){
+  bugService.onDownloadPdf()
+}
 
   if (!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>
       <main>
+        <button onClick={onDownloadPdf}> Download Pdf</button>
         <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <button onClick={onAddBug}>Add Bug ⛐</button>
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />

@@ -1,5 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import PDFDocument from 'pdfkit'
+import fs from 'fs'
 
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
@@ -20,6 +22,25 @@ app.get('/api/bug', (req, res) => {
         })
 })
 
+app.get('/api/bug/download', (req, res) => {
+    console.log('in download')
+    const doc = new PDFDocument()
+    doc.pipe(fs.createWriteStream('bugs.pdf'))
+    doc.fontSize(25).text('Bugs List').fontSize(16)
+    bugService.query().then((bugs) => {
+        bugs.forEach(bug => {
+            var bugTxt = `${bug.title}:${bug.description}. severity:${bug.severity}`
+            doc.text(bugTxt)
+        })
+    })
+    bugService.query().then((bugs) => {
+        bugs.forEach(bug => {
+            var bugTxt = `${bug.title}:${bug.description}. severity:${bug.severity}`
+            doc.text(bugTxt)
+        })
+        doc.end()
+    })
+})
 
 app.get('/api/bug/save', (req, res) => {
     const { _id, title, description, severity, createdAt } = req.query
@@ -48,6 +69,9 @@ app.get('/api/bug/:id/remove', (req, res) => {
     bugService.remove(id)
         .then(() => res.send(`Bug ${id} deleted...`))
 })
+
+
+
 
 
 const port = 3030

@@ -8,6 +8,7 @@ export const bugService = {
     remove,
     getEmptyBug,
     getDefaultFilter,
+    onDownloadPdf,
 }
 
 // `http://127.0.0.1:3030/api/bug`
@@ -52,3 +53,7 @@ function getDefaultFilter() {
     return { txt: '', minSeverity: 0, }
 }
 
+function onDownloadPdf(){
+    console.log('hi');
+    return axios.get(BASE_URL + '/download').then(res => res.data)
+}

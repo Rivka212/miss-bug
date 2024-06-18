@@ -13,18 +13,13 @@ export const bugService = {
 
 // `http://127.0.0.1:3030/api/bug`
 
-function query(filterBy) {
-    const { txt, minSeverity } = filterBy
-    return axios.get(`${BASE_URL}?minSeverity=${minSeverity}&txt=${txt}`).then(res => res.data)
-    // if (filterBy.txt) {
-    //     const regExp = new RegExp(filterBy.txt, 'i')
-    //     bugs = bugs.filter(bug => regExp.test(bug.txt))
-    // }
-    // if (filterBy.minSeverity) {
-    //     bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
-    // }
-    // return bugs
-    // })
+function query(filterBy = {}) {
+
+    return axios.get(BASE_URL, { params: filterBy })
+        //   const { txt, minSeverity } = filterBy
+        // return axios.get(`${BASE_URL}?minSeverity=${minSeverity}&txt=${txt}`)
+        .then(res => res.data)
+
 }
 
 
@@ -53,7 +48,7 @@ function getDefaultFilter() {
     return { txt: '', minSeverity: 0, }
 }
 
-function onDownloadPdf(){
+function onDownloadPdf() {
     console.log('hi');
     return axios.get(BASE_URL + '/download').then(res => res.data)
 }

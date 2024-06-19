@@ -11,7 +11,6 @@ export const bugService = {
     onDownloadPdf,
 }
 
-// `http://127.0.0.1:3030/api/bug`
 
 function query(filterBy = {}) {
 
@@ -19,7 +18,6 @@ function query(filterBy = {}) {
         //   const { txt, minSeverity } = filterBy
         // return axios.get(`${BASE_URL}?minSeverity=${minSeverity}&txt=${txt}`)
         .then(res => res.data)
-
 }
 
 

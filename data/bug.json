@@ -8,30 +8,21 @@
   },
   {
     "_id": "abc125",
-    "title": "Cannot show detalis",
+    "title": "Cannot show detalis jnlknl",
     "description": "problem when clicking details",
     "severity": 9,
-    "createdAt": 1542107359456,
-    "labels": [
-      "critical"
-    ]
+    "createdAt": 1542107359456
   },
   {
-    "_id": "OqI8u",
-    "title": "null",
-    "description": "null",
-    "severity": 0,
-    "createdAt": null,
-    "labels": [
-      "critical",
-      "dev-branch"
-    ]
-  },
-  {
-    "_id": "AYr3T",
-    "title": "m,m,m.m",
+    "title": "moving bug",
     "description": "",
-    "severity": 0,
-    "createdAt": 0
+    "severity": 4,
+    "_id": "uGRYt"
+  },
+  {
+    "title": "cannot",
+    "description": "",
+    "severity": 3,
+    "_id": "2EUeI"
   }
 ]

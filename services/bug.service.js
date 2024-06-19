@@ -7,7 +7,7 @@ export const bugService = {
     remove,
     save,
 }
-
+const PAGE_SIZE = 4
 var bugs = utilService.readJsonFile('./data/bug.json')
 
 function query(filterBy) {
@@ -19,7 +19,9 @@ function query(filterBy) {
     if (filterBy.minSpeed) {
         filteredBugs = filteredBugs.filter(bug => bug.severity >= filterBy.minSeverity)
     }
-
+    const startIdx = filterBy.pageIdx * PAGE_SIZE
+    filteredBugs = filteredBugs.slice(startIdx, startIdx + PAGE_SIZE)
+   
     return Promise.resolve(filteredBugs)
 }
 
@@ -42,6 +44,8 @@ function save(bugToSave) {
         bugs.splice(idx, 1, bugToSave)
     } else {
         bugToSave._id = utilService.makeId()
+        bugToSave.createdAt = new Date()
+        console.log(bugToSave.createdAt);
         bugs.push(bugToSave)
     }
     return _saveBugsToFile()

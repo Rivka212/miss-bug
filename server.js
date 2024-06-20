@@ -5,6 +5,7 @@ import fs from 'fs'
 
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
+import { log } from 'console'
 
 const app = express()
 
@@ -14,12 +15,15 @@ app.use(express.json())
 
 
 app.get('/api/bug', (req, res) => {
+
     const filterBy = {
         txt: req.query.txt || '',
         minSeverity: +req.query.minSeverity || 0,
         pageIdx: +req.query.pageIdx || 0,
     }
-    bugService.query(filterBy)
+    const sortBy = { sortBy: req.query.sortBy || '', dir: +req.query.dir || 0, pageIdx: +req.query.pageIdx || 0 }
+
+    bugService.query(filterBy, sortBy)
         .then(bugs => res.send(bugs))
         .catch(err => {
             loggerService.error(`Couldn't get bugs...`)

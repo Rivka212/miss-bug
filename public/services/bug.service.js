@@ -12,8 +12,13 @@ export const bugService = {
 }
 
 
-function query(filterBy = {}) {
-    return axios.get(BASE_URL, { params: filterBy })
+function query(filterBy = {}, sortBy = {}) {
+    console.log(filterBy, sortBy);
+    const queryParams = {
+        ...filterBy, ...sortBy
+    }
+    console.log(queryParams);
+    return axios.get(BASE_URL, { params: queryParams })
         .then(res => res.data)
 }
 

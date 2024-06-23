@@ -6,6 +6,7 @@ export const bugService = {
     getById,
     remove,
     save,
+    getLabels,
 }
 const PAGE_SIZE = 4
 var bugs = utilService.readJsonFile('./data/bug.json')
@@ -49,6 +50,16 @@ function remove(bugId) {
     bugs.splice(idx, 1)
 
     return _saveBugsToFile()
+}
+
+function getLabels() {
+    return query().then(bugs => {
+        const bugsLabels = bugs.reduce((acc, bug) => {
+            return [...acc, ...bug.labels]
+        }, [])
+        console.log(bugsLabels);
+        return [...new Set(bugsLabels)]
+    })
 }
 
 function save(bugToSave) {

@@ -52,24 +52,53 @@ app.get('/api/bug/download', (req, res) => {
 
 app.put('/api/bug/:id', (req, res) => {
     const { _id, title, description, severity, createdAt, labels } = req.body
-    const bugToSave = { _id, title, description, severity: +severity, createdAt: +createdAt, labels }
+    const bugToSave = {
+        __id,
+        title: title || '',
+        description: description || '',
+        severity: +severity || 0,
+        createdAt: +createdAt || 0,
+        labels: labels || []
+    }
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
+        .catch(err => {
+            loggerService.error(`Couldn't update bug (${_id})`, err)
+            res.status(500).send(`Couldn't update bug (${_id})`)
+        })
 })
+
+app.get('/api/bug/labels', (req, res) => {
+    bugService.getLabels()
+        .then(labels => res.send(labels))
+        .catch(err => {
+            loggerService.error(`Couldn't get labels`, err)
+            res.status(500).send(`Couldn't get labels`)
+        })
+})
+
 
 app.post('/api/bug/', (req, res) => {
     const { title, description, severity, labels } = req.body
-    const bugToSave = { title, description, severity: +severity, labels }
-    // createdAt: +createdAt
+    const bugToSave = { 
+        title: title || '',
+        description: description || '',
+        severity: +severity || 0,
+        createdAt: +createdAt || 0,
+        labels: labels || []
+     }
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
+        .catch(err => {
+            loggerService.error(`Couldn't add bug`, err)
+            res.status(500).send(`Couldn't add bug`)
+        })
 })
 
 app.get('/api/bug/:id', (req, res) => {
     const { id } = req.params
     var visitedBugs = req.cookies.visitedBugs || []
     if (visitedBugs.length >= 3) res.status(401).send('Wait for a bit')
-    // console.log(`User visited at the following bugs: ${req.cookies}`)
 
     if (!visitedBugs.includes(id)) visitedBugs.push(id)
     res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })

@@ -9,16 +9,13 @@ export const bugService = {
     getEmptyBug,
     getDefaultFilter,
     onDownloadPdf,
+    getLabels,
+    getPageCount,
 }
 
 
-function query(filterBy = {}, sortBy = {}) {
-    console.log(filterBy, sortBy);
-    const queryParams = {
-        ...filterBy, ...sortBy
-    }
-    console.log(queryParams);
-    return axios.get(BASE_URL, { params: queryParams })
+function query(filterBy = {}) {
+    return axios.get(BASE_URL, { params:filterBy })
         .then(res => res.data)
 }
 
@@ -41,6 +38,15 @@ function save(bug) {
         return axios.post(BASE_URL, bug)
             .then(res => res.data)
     }
+}
+
+function getLabels() {
+    console.log('lable');
+    return axios.get(BASE_URL + '/labels').then(res => res.data)
+}
+
+function getPageCount() {
+    return axios.get(BASE_URL + '/pageCount').then(res => res.data)
 }
 
 function getEmptyBug(title = '', description = '', severity = '', createdAt = '', labels = '') {

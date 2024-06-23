@@ -11,15 +11,36 @@ const { Link } = ReactRouterDOM
 export function BugIndex() {
   const [bugs, setBugs] = useState([])
   const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
-  // const [editSortBy, setEditSortBy] = useState()
+  const [labels, setLabels] = useState([])
   const debouncedSetFilterBy = useRef(utilService.debounce(onSetFilterBy, 500))
 
   useEffect(() => {
+    loadLabels()
+    // loadPageCount()
+  }, [])
+
+
+  useEffect(() => {
+    loadBugs()
+  }, [filterBy])
+
+
+  function loadBugs() {
     bugService.query(filterBy)
       .then(bugs => setBugs(bugs))
       .catch(err => console.log('err:', err))
-  }, [filterBy])
+  }
 
+
+
+  function loadLabels() {
+    bugService.getLabels()
+      .then(labels => setLabels(labels))
+      .catch(err => {
+        console.log('err:', err)
+        showErrorMsg('Cannot get labels')
+      })
+  }
 
   function onRemoveBug(bugId) {
     bugService
@@ -38,11 +59,11 @@ export function BugIndex() {
 
   function onSetFilterBy(newFilterBy) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }));
-}
+  }
 
-function handleSetSortBy(newSortBy) {
+  function handleSetSortBy(newSortBy) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...newSortBy }))
-}
+  }
 
 
   function handleSetSortBy(newSortBy) {
@@ -59,14 +80,14 @@ function handleSetSortBy(newSortBy) {
   function onDownloadPdf() {
     bugService.onDownloadPdf()
   }
-
+  //  pageCount={pageCount}
   if (!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>
       <main>
         <button onClick={onDownloadPdf}> Download PDF</button>
-        <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} />
+        <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} labels={labels} />
         <BugSorting onSetSortBy={handleSetSortBy} />
         <Link to="/bug/edit" >Add Bug ⛐</Link> |
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} />

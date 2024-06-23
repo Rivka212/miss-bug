@@ -77,6 +77,15 @@ app.get('/api/bug/labels', (req, res) => {
         })
 })
 
+app.get('/api/bug/pageCount', (req, res) => {
+    bugService.getPageCount()
+        .then(pageCount => res.send(pageCount + ''))
+        .catch(err => {
+            loggerService.error(`Couldn't get pageCount`, err)
+            res.status(500).send(`Couldn't get pageCount`)
+        })
+})
+
 
 app.post('/api/bug/', (req, res) => {
     const { title, description, severity, labels } = req.body

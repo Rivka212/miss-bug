@@ -11,12 +11,14 @@ const { Link } = ReactRouterDOM
 export function BugIndex() {
   const [bugs, setBugs] = useState([])
   const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
-  const [labels, setLabels] = useState([])
   const debouncedSetFilterBy = useRef(utilService.debounce(onSetFilterBy, 500))
+
+  const [labels, setLabels] = useState([])
+  const [pageCount, setPageCount] = useState(0)
 
   useEffect(() => {
     loadLabels()
-    // loadPageCount()
+    loadPageCount()
   }, [])
 
 
@@ -32,7 +34,6 @@ export function BugIndex() {
   }
 
 
-
   function loadLabels() {
     bugService.getLabels()
       .then(labels => setLabels(labels))
@@ -41,6 +42,15 @@ export function BugIndex() {
         showErrorMsg('Cannot get labels')
       })
   }
+
+  function loadPageCount() {
+    bugService.getPageCount()
+      .then(pageCount => setPageCount(+pageCount))
+      .catch(err => {
+        console.log('err:', err)
+      })
+  }
+
 
   function onRemoveBug(bugId) {
     bugService
@@ -80,14 +90,14 @@ export function BugIndex() {
   function onDownloadPdf() {
     bugService.onDownloadPdf()
   }
-  //  pageCount={pageCount}
+
   if (!bugs || !bugs.length) return (<h2>Loading...</h2>)
   return (
     <main>
       <h3>Bugs App</h3>
       <main>
         <button onClick={onDownloadPdf}> Download PDF</button>
-        <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} labels={labels} />
+        <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} labels={labels} pageCount={pageCount} />
         <BugSorting onSetSortBy={handleSetSortBy} />
         <Link to="/bug/edit" >Add Bug ⛐</Link> |
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} />

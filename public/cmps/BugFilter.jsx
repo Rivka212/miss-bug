@@ -40,8 +40,10 @@ export function BugFilter({ filterBy, onSetFilterBy, labels: availableLabels, pa
 
 
     function onGetPage(diff) {
-        if (filterByToEdit.pageIdx + diff < 0) return
-        setFilterByToEdit(prev => ({ ...prev, pageIdx: prev.pageIdx + diff }))
+        let pageIdx = filterByToEdit.pageIdx + diff
+        if (pageIdx < 0) pageIdx = pageCount - 1
+        if (pageIdx > pageCount - 1) pageIdx = 0
+        setFilterByToEdit(prev => ({ ...prev, pageIdx }))
     }
 
     const { txt, minSeverity, labels } = filterByToEdit

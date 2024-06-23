@@ -24,7 +24,7 @@ app.get('/api/bug', (req, res) => {
         sortDir: +req.query.sortDir || 1,
         labels: req.query.labels || []
     }
-
+console.log('service filterBy',filterBy);
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))
         .catch(err => {

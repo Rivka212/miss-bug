@@ -17,7 +17,7 @@ export function BugSorting({ onSetSortBy }) {
         const { checked } = event.target
         const dir = checked ? -1 : 1
 
-        const newSortBy = { sortBy: editSortBy.sortBy, sortDir: dir };
+        const newSortBy = { sortBy: editSortBy.sortBy, sortDir: dir }
         setEditSortBy(prevEditSortBy => ({
             ...prevEditSortBy,
             sortDir: dir,

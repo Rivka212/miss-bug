@@ -14,7 +14,6 @@ const PAGE_SIZE = 4
 var bugs = utilService.readJsonFile('./data/bug.json')
 
 function query(filterBy) {
-
     var filteredBugs = bugs
     if (!filterBy) return Promise.resolve(filteredBugs)
     if (filterBy.txt) {
@@ -28,12 +27,14 @@ function query(filterBy) {
     if (filterBy.sortBy) {
         if (filterBy.sortBy === 'severity') {
             filteredBugs.sort((bug1, bug2) => (bug1.severity - bug2.severity) * filterBy.sortDir)
-        } else if (sortBy.sortBy === 'createdAt') {
+        } else if (filterBy.sortBy === 'createdAt') {
             filteredBugs.sort((bug1, bug2) => ((bug1.createdAt - bug2.createdAt)) * filterBy.sortDir)
-        } else if (sortBy.sortBy === 'title') {
+        } else if (filterBy.sortBy === 'title') {
             filteredBugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title) * filterBy.sortDir)
         }
-
+    }
+    if (filterBy.labels?.length) {
+        filteredBugs = filteredBugs.filter(bug => filterBy.labels.every(label => bug.labels.includes(label)))
     }
 
     const startIdx = filterBy.pageIdx * PAGE_SIZE
@@ -59,7 +60,7 @@ function getLabels() {
         const bugsLabels = bugs.reduce((acc, bug) => {
             return [...acc, ...bug.labels]
         }, [])
-        console.log(bugsLabels);
+        console.log('bugsLabels', bugsLabels);
         return [...new Set(bugsLabels)]
     })
 }

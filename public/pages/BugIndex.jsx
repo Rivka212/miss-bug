@@ -11,21 +11,15 @@ const { Link } = ReactRouterDOM
 export function BugIndex() {
   const [bugs, setBugs] = useState([])
   const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
-  const [sortBy, setSortBy] = useState()
-
+  // const [editSortBy, setEditSortBy] = useState()
   const debouncedSetFilterBy = useRef(utilService.debounce(onSetFilterBy, 500))
 
   useEffect(() => {
-    console.log(sortBy);
-    bugService.query(filterBy, sortBy)
+    bugService.query(filterBy)
       .then(bugs => setBugs(bugs))
       .catch(err => console.log('err:', err))
-  }, [filterBy, sortBy])
+  }, [filterBy])
 
-
-  // useEffect(() => {
-  //   bugService.query({ ...filterBy, ...sortBy })
-  // },[])
 
   function onRemoveBug(bugId) {
     bugService
@@ -42,19 +36,25 @@ export function BugIndex() {
   }
 
 
-  function onSetFilterBy(filterBy) {
-    setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-  }
+  function onSetFilterBy(newFilterBy) {
+    setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }));
+}
+
+function handleSetSortBy(newSortBy) {
+    setFilterBy(prevFilter => ({ ...prevFilter, ...newSortBy }))
+}
+
 
   function handleSetSortBy(newSortBy) {
-    console.log(newSortBy)
-    setSortBy(newSortBy)
+    console.log(newSortBy);
+    const { sortBy, sortDir } = newSortBy;
+    setFilterBy(prevFilter => ({
+      ...prevFilter,
+      sortBy: sortBy,
+      sortDir: sortDir
+    }));
   }
 
-  //  function handleSetSortBy(sortBy) {
-  //   console.log(sortBy);
-  //     setSortBy(prevsort => ({ ...prevsort, ...sortBy }))
-  //   }
 
   function onDownloadPdf() {
     bugService.onDownloadPdf()
@@ -67,7 +67,7 @@ export function BugIndex() {
       <main>
         <button onClick={onDownloadPdf}> Download PDF</button>
         <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} />
-        <BugSorting sortBy={sortBy} onSetSortBy={handleSetSortBy} />
+        <BugSorting onSetSortBy={handleSetSortBy} />
         <Link to="/bug/edit" >Add Bug ⛐</Link> |
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} />
       </main>

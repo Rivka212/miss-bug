@@ -48,10 +48,9 @@ function getEmptyBug(title = '', description = '', severity = '', createdAt = ''
 }
 
 function getDefaultFilter() {
-    return { txt: '', minSeverity: '', pageIdx: 0 }
+    return { txt: '', minSeverity: '', pageIdx: 0 ,sortBy: '', sortDir: 1, labels: []}
 }
 
 function onDownloadPdf() {
-    console.log('hi');
     return axios.get(BASE_URL + '/download').then(res => res.data)
 }

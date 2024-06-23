@@ -1,8 +1,13 @@
 .bug-filter {
     background-color: var(--clr2bg);
+    padding: 10px;
 }
 
 .bug-filter form {
     display: grid;
     grid-template-columns: 100px 200px;
+}
+
+.bug-filter > label:nth-of-type(2) {
+    margin-left: 15px;
 }

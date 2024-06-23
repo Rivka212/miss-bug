@@ -1,0 +1,14 @@
+.bug-sort {
+    background-color: var(--clr2bg); 
+    display: grid;
+    grid-template-columns: 100px 200px;
+    padding: 10px;
+}
+
+.bug-sort label > span{
+    margin-left: 10px;
+}
+
+.bug-sort select{
+    width: 105px;
+}

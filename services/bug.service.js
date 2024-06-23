@@ -10,9 +10,10 @@ export const bugService = {
 const PAGE_SIZE = 4
 var bugs = utilService.readJsonFile('./data/bug.json')
 
-function query(filterBy, sortBy) {
+function query(filterBy) {
 
     var filteredBugs = bugs
+    if (!filterBy) return Promise.resolve(filteredBugs)
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
         filteredBugs = filteredBugs.filter(bug => regExp.test(bug.description) || regExp.test(bug.title))
@@ -21,12 +22,15 @@ function query(filterBy, sortBy) {
         filteredBugs = filteredBugs.filter(bug => bug.severity >= filterBy.minSeverity)
     }
 
-    if (sortBy.sortBy === 'severity') {
-        filteredBugs.sort((bug1, bug2) => (bug1.severity - bug2.severity) * sortBy.dir)
-    } if (sortBy.sortBy === 'createdAt') {
-        filteredBugs.sort((bug1, bug2) => (new Date(bug1.createdAt) - new Date(bug2.createdAt)) * sortBy.dir)
-    } if (sortBy.sortBy === 'title') {
-        filteredBugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title) * sortBy.dir)
+    if (filterBy.sortBy) {
+        if (filterBy.sortBy === 'severity') {
+            filteredBugs.sort((bug1, bug2) => (bug1.severity - bug2.severity) * filterBy.sortDir)
+        } else if (sortBy.sortBy === 'createdAt') {
+            filteredBugs.sort((bug1, bug2) => ((bug1.createdAt - bug2.createdAt)) * filterBy.sortDir)
+        } else if (sortBy.sortBy === 'title') {
+            filteredBugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title) * filterBy.sortDir)
+        }
+
     }
 
     const startIdx = filterBy.pageIdx * PAGE_SIZE
@@ -53,7 +57,7 @@ function save(bugToSave) {
         bugs.splice(idx, 1, bugToSave)
     } else {
         bugToSave._id = utilService.makeId()
-        bugToSave.createdAt = new Date()
+        bugToSave.createdAt = Date.now()
         console.log(bugToSave.createdAt);
         bugs.push(bugToSave)
     }

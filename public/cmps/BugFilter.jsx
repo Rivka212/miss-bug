@@ -44,6 +44,9 @@ export function BugFilter({ filterBy, onSetFilterBy }) {
             <label htmlFor="minSeverity">Min Severity: </label>
             <input value={minSeverity} onChange={handleChange} type="number" placeholder="By Min Severity" id="minSeverity" name="minSeverity" />
 
+            <label htmlFor="txt">Text: </label>
+            <input value={txt} onChange={handleChange} type="text" placeholder="By Text" id="txt" name="txt" />
+
             <button onClick={() => onGetPage(-1)}>-</button>
             <span>{filterByToEdit.pageIdx + 1}</span>
             <button onClick={() => onGetPage(1)}>+</button>

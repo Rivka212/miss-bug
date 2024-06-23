@@ -20,10 +20,12 @@ app.get('/api/bug', (req, res) => {
         txt: req.query.txt || '',
         minSeverity: +req.query.minSeverity || 0,
         pageIdx: +req.query.pageIdx || 0,
+        sortBy: req.query.sortBy || '',
+        sortDir: +req.query.sortDir || 1,
+        labels: req.query.labels || []
     }
-    const sortBy = { sortBy: req.query.sortBy || '', dir: +req.query.dir || 0, pageIdx: +req.query.pageIdx || 0 }
 
-    bugService.query(filterBy, sortBy)
+    bugService.query(filterBy)
         .then(bugs => res.send(bugs))
         .catch(err => {
             loggerService.error(`Couldn't get bugs...`)
@@ -36,19 +38,16 @@ app.get('/api/bug/download', (req, res) => {
     const doc = new PDFDocument()
     doc.pipe(fs.createWriteStream('bugs.pdf'))
     doc.fontSize(25).text('Bugs List').fontSize(16)
-    bugService.query().then((bugs) => {
-        bugs.forEach(bug => {
-            var bugTxt = `${bug.title}:${bug.description}. severity:${bug.severity}`
-            doc.text(bugTxt)
+    bugService.query()
+        .then((bugs) => {
+            bugs.forEach(bug => {
+                var bugTxt = `${bug.title}:${bug.description}. severity:${bug.severity}`
+                doc.text(bugTxt)
+            })
+
+            doc.end()
+            res.end()
         })
-    })
-    bugService.query().then((bugs) => {
-        bugs.forEach(bug => {
-            var bugTxt = `${bug.title}:${bug.description}. severity:${bug.severity}`
-            doc.text(bugTxt)
-        })
-        doc.end()
-    })
 })
 
 app.put('/api/bug/:id', (req, res) => {

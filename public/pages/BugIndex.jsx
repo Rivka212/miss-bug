@@ -99,7 +99,7 @@ export function BugIndex() {
         <button onClick={onDownloadPdf}> Download PDF</button>
         <BugFilter filterBy={filterBy} onSetFilterBy={debouncedSetFilterBy.current} labels={labels} pageCount={pageCount} />
         <BugSorting onSetSortBy={handleSetSortBy} />
-        <Link to="/bug/edit" >Add Bug ⛐</Link> |
+        <button> <Link to="/bug/edit" >Add Bug ⛐</Link> </button>
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} />
       </main>
     </main>

@@ -1,25 +1,5 @@
 [
   {
-    "_id": "abc125",
-    "title": "Cannot show detalis",
-    "description": "problem when clicking details",
-    "severity": 6,
-    "createdAt": 1542107359456,
-    "labels": [
-      "critical"
-    ]
-  },
-  {
-    "_id": "uGRYt",
-    "title": "moving bug",
-    "description": "",
-    "severity": 6,
-    "createdAt": null,
-    "labels": [
-      "dev-branch"
-    ]
-  },
-  {
     "title": "cannot",
     "description": "",
     "severity": 3,
@@ -42,7 +22,49 @@
     ]
   },
   {
+    "_id": "abc127",
+    "title": "Cannot save a new bug",
+    "description": "problem when clicking Save",
+    "severity": 3,
+    "createdAt": 1542107359459,
+    "labels": [
+      "critical",
+      "need-CR",
+      "dev-branch"
+    ]
+  },
+  {
+    "_id": "abc125",
+    "title": "Cannot show detalis",
+    "description": "problem when clicking details",
+    "severity": 6,
+    "createdAt": 1542107359456,
+    "labels": [
+      "critical"
+    ]
+  },
+  {
+    "_id": "uGRYt",
+    "title": "moving bug",
+    "description": "",
+    "severity": 6,
+    "createdAt": null,
+    "labels": [
+      "dev-branch"
+    ]
+  },
+  {
     "_id": "abc124",
+    "title": "Cannot remove a bug",
+    "description": "problem when clicking Delete",
+    "severity": 6,
+    "createdAt": 1542107359455,
+    "labels": [
+      "critical"
+    ]
+  },
+  {
+    "_id": "abc128",
     "title": "Cannot remove a bug",
     "description": "problem when clicking Delete",
     "severity": 6,
@@ -63,28 +85,6 @@
     ]
   },
   {
-    "_id": "abc127",
-    "title": "Cannot save a new bug",
-    "description": "problem when clicking Save",
-    "severity": 3,
-    "createdAt": 1542107359459,
-    "labels": [
-      "critical",
-      "need-CR",
-      "dev-branch"
-    ]
-  },
-  {
-    "_id": "abc128",
-    "title": "Cannot remove a bug",
-    "description": "problem when clicking Delete",
-    "severity": 6,
-    "createdAt": 1542107359455,
-    "labels": [
-      "critical"
-    ]
-  },
-  {
     "_id": "abc129",
     "title": "Cannot show detalis",
     "description": "problem when clicking details",
@@ -94,29 +94,5 @@
       "need-CR",
       "dev-branch"
     ]
-  },
-  {
-    "title": "nknlm;lm;",
-    "description": "",
-    "severity": 3,
-    "labels": "",
-    "_id": "hHNpd",
-    "createdAt": "2024-06-19T19:34:54.550Z"
-  },
-  {
-    "title": "m,.",
-    "description": "",
-    "severity": 3,
-    "labels": "",
-    "_id": "22Y05",
-    "createdAt": 1719133453171
-  },
-  {
-    "title": "",
-    "description": "",
-    "severity": 0,
-    "labels": "",
-    "_id": "Bz1IA",
-    "createdAt": 1719133502185
   }
 ]

@@ -1,14 +1,16 @@
 .app-header {
     background-color: var(--clr1);
     color: var(--clr2bg-light);
-    
-    
 }
 
 .header-container {
     display: flex;
     align-items: center;
+}
 
+.bugs-header-nav{
+    background-color: rgb(180, 179, 181);
+    padding: 10px;
 }
 
 .header-container h1 {

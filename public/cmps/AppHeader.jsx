@@ -1,7 +1,7 @@
-const {NavLink} = ReactRouterDOM
-const {useEffect} = React
+const { NavLink } = ReactRouterDOM
+const { useEffect } = React
 
-import {UserMsg} from './UserMsg.jsx'
+import { UserMsg } from './UserMsg.jsx'
 
 export function AppHeader() {
   useEffect(() => {
@@ -9,13 +9,16 @@ export function AppHeader() {
   }, [])
 
   return (
-    <header>
+    <header className="app-header full main-layout">
+      <section className="header-container">
+        <h1>Bugs are Forever</h1>
+        <nav className="app-nav">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/bug">Bugs</NavLink>
+        </nav>
+      </section>
       <UserMsg />
-      <nav>
-        <NavLink to="/">Home</NavLink> |<NavLink to="/bug">Bugs</NavLink> |
-        <NavLink to="/about">About</NavLink>
-      </nav>
-      <h1>Bugs are Forever</h1>
     </header>
   )
 }

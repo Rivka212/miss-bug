@@ -123,7 +123,9 @@ app.delete('/api/bug/:id', (req, res) => {
         .then(() => res.send(`Bug ${id} deleted...`))
 })
 
-
+app.get('/**',(req,res)=>{
+    res.sendFile(path.resolve('publice/index.html'))
+})
 
 
 

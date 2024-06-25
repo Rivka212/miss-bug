@@ -192,7 +192,14 @@ app.post('/api/auth/signup', (req, res) => {
 })
 
 
+// Clear the cookie
+app.post('/api/auth/logout', (req, res) => {
+    res.clearCookie('loginToken')
+    res.send('logged-out!')
+})
 
+
+//Browser Router
 app.get('/**',(req,res)=>{
     res.sendFile(path.resolve('publice/index.html'))
 })

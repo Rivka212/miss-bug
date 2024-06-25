@@ -56,6 +56,9 @@ app.get('/api/bug/download', (req, res) => {
 
 // Bug UPDATE
 app.put('/api/bug/:id', (req, res) => {
+    const loggedinUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot update bug')
+
     const { _id, title, description, severity, createdAt, labels } = req.body
     const bugToSave = {
         __id,

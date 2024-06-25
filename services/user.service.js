@@ -13,6 +13,14 @@ export const userService = {
     save,
     checkLogin,
     getLoginToken,
+    validateToken
+}
+
+function validateToken(token) {
+    if (!token) return null
+    const str = cryptr.decrypt(token)
+    const user = JSON.parse(str)
+    return user
 }
 
 function getLoginToken(user) {

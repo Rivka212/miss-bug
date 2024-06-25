@@ -92,7 +92,10 @@ app.get('/api/bug/pageCount', (req, res) => {
 })
 
 // Bug CREATE
-app.post('/api/bug/', (req, res) => {
+app.post('/api/bug', (req, res) => {
+    const loggedinUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot add bug')
+
     const { title, description, severity, labels } = req.body
     const bugToSave = { 
         title: title || '',
@@ -104,8 +107,8 @@ app.post('/api/bug/', (req, res) => {
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
         .catch(err => {
-            loggerService.error(`Couldn't add bug`, err)
-            res.status(500).send(`Couldn't add bug`)
+            loggerService.error(`Cannot add bug`, err)
+            res.status(500).send(`Cannot add bug`)
         })
 })
 

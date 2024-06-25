@@ -72,20 +72,20 @@ export function BugIndex() {
     setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }));
   }
 
-  function handleSetSortBy(newSortBy) {
-    console.log(newSortBy);
-    setFilterBy(prevFilter => ({ ...prevFilter, ...newSortBy }))
-  }
+  // function handleSetSortBy(newSortBy) {
+  //   console.log('newSortBy 1', newSortBy);
+  //   setFilterBy(prevFilter => ({ ...prevFilter, ...newSortBy }))
+  // }
 
 
   function handleSetSortBy(newSortBy) {
-    console.log(newSortBy);
+    console.log('newSortBy 2', newSortBy);
     const { sortBy, sortDir } = newSortBy;
     setFilterBy(prevFilter => ({
       ...prevFilter,
       sortBy: sortBy,
       sortDir: sortDir
-    }));
+    }))
   }
 
 

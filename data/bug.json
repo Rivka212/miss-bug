@@ -1,20 +1,14 @@
 [
   {
-    "title": "cannot",
-    "description": "",
-    "severity": 3,
-    "_id": "2EUeI",
-    "labels": [
-      "critical",
-      "dev-branch"
-    ]
-  },
-  {
     "_id": "abc123",
     "title": "Cannot save a new bug",
     "description": "problem when clicking Save",
     "severity": 3,
     "createdAt": 1542107359454,
+    "creator": {
+      "_id": "u108",
+      "fullname": "Zuzi Tani"
+    },
     "labels": [
       "critical",
       "need-CR",
@@ -27,6 +21,10 @@
     "description": "problem when clicking Save",
     "severity": 3,
     "createdAt": 1542107359459,
+    "creator": {
+      "_id": "u107",
+      "fullname": "Tuti Nopi"
+    },
     "labels": [
       "critical",
       "need-CR",
@@ -39,6 +37,10 @@
     "description": "problem when clicking details",
     "severity": 6,
     "createdAt": 1542107359456,
+    "creator": {
+      "_id": "u106",
+      "fullname": "Peni Lul"
+    },
     "labels": [
       "critical"
     ]
@@ -49,6 +51,10 @@
     "description": "",
     "severity": 6,
     "createdAt": null,
+    "creator": {
+      "_id": "u105",
+      "fullname": "Moti Ana"
+    },
     "labels": [
       "dev-branch"
     ]
@@ -59,6 +65,10 @@
     "description": "problem when clicking Delete",
     "severity": 6,
     "createdAt": 1542107359455,
+    "creator": {
+      "_id": "u104",
+      "fullname": "Sami Nana"
+    },
     "labels": [
       "critical"
     ]
@@ -69,6 +79,10 @@
     "description": "problem when clicking Delete",
     "severity": 6,
     "createdAt": 1542107359455,
+    "creator": {
+      "_id": "u103",
+      "fullname": "NULI Pa"
+    },
     "labels": [
       "critical"
     ]
@@ -79,6 +93,10 @@
     "description": "problem when clicking details",
     "severity": 9,
     "createdAt": 1542107359450,
+    "creator": {
+      "_id": "u102",
+      "fullname": "LUli Pa"
+    },
     "labels": [
       "need-CR",
       "dev-branch"
@@ -90,6 +108,10 @@
     "description": "problem when clicking details",
     "severity": 9,
     "createdAt": 1542107359456,
+    "creator": {
+      "_id": "u101",
+      "fullname": "Puki Ja"
+    },
     "labels": [
       "need-CR",
       "dev-branch"

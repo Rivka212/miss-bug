@@ -130,6 +130,8 @@ app.get('/api/bug/:id', (req, res) => {
 
 // Bug DELETE
 app.delete('/api/bug/:id', (req, res) => {
+     const loggedinUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot remove bug')
     const { id } = req.params
     bugService.remove(id)
         .then(() => res.send(`Bug ${id} deleted...`))

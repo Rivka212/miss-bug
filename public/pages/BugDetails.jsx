@@ -20,7 +20,6 @@ export function BugDetails() {
     function loadBug() {
         bugService.getById(params.bugId)
             .then(bug => {
-                console.log(params.bugId, bug)
                 return bug
             })
             .then(setBug)

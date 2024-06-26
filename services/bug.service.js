@@ -48,7 +48,7 @@ function getById(bugId) {
     return Promise.resolve(bug)
 }
 
-function remove(bugId) {
+function remove(bugId,loggedinUser) {
     const idx = bugs.findIndex(bug => bug._id === bugId)
     if (idx === -1) return Promise.reject('No Such Bug')
         const bug = bugs[idx]
@@ -56,7 +56,7 @@ function remove(bugId) {
             return Promise.reject('Not your bug')
         }
     bugs.splice(idx, 1)
-
+    
     return _saveBugsToFile()
 }
 

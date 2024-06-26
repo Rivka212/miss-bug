@@ -133,8 +133,16 @@ app.delete('/api/bug/:id', (req, res) => {
      const loggedinUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedinUser) return res.status(401).send('Cannot remove bug')
     const { id } = req.params
-    bugService.remove(id)
-        .then(() => res.send(`Bug ${id} deleted...`))
+    bugService.remove(id,loggedinUser)
+        .then(() => {
+            loggerService.info(`Bug ${id} removed`)
+
+            res.send('Removed!')
+        })
+        .catch((err) => {
+            loggerService.error('Cannot remove bug', err)
+            res.status(400).send('Cannot remove bug')
+        })
 })
 
 // AUTH API

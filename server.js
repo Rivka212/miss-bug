@@ -61,7 +61,7 @@ app.put('/api/bug/:id', (req, res) => {
 
     const { _id, title, description, severity, createdAt, labels } = req.body
     const bugToSave = {
-        __id,
+        _id,
         title: title || '',
         description: description || '',
         severity: +severity || 0,

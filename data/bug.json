@@ -116,5 +116,13 @@
       "need-CR",
       "dev-branch"
     ]
+  },
+  {
+    "title": "Cannot show detalis",
+    "description": "problem when clicking details",
+    "severity": 20,
+    "createdAt": 1719391587033,
+    "labels": [],
+    "_id": "59sKK"
   }
 ]

@@ -22,6 +22,7 @@ function query(filterBy = {}) {
 
 
 function getById(bugId) {
+    console.log('bugId', bugId);
     return axios.get(BASE_URL + '/' + bugId)
         .then(res => res.data)
 }
@@ -32,6 +33,7 @@ function remove(bugId) {
 }
 
 function save(bug) {
+    console.log('bug',bug);
     if (bug._id) {
         return axios.put(BASE_URL + '/' + bug._id, bug)
             .then(res => res.data)

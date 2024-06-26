@@ -1,48 +1,54 @@
 [
-    {
-      "_id": "u101",
-      "username": "puki",
-      "fullname": "Puki Ja",
-      "password": "secret1",
-      "score": 100,
-      "isAdmin": true
-    },
-    {
-      "_id": "u102",
-      "username": "lUli",
-      "fullname": "LUli Pa",
-      "password": "secret2",
-      "score": 100
-    },
-    {
-        "_id": "u103",
-      "username": "nuli",
-      "password": "nuli",
-      "fullname": "NULI Pa",
-      "score": 100
-    },
-    {
-      "username": "sami",
-      "password": "sami",
-      "fullname": "Sami Nana",
-      "_id": "u104"
-    },
-    {
-      "username": "moti",
-      "password": "moti",
-      "fullname": "Moti Ana",
-      "_id": "u105"
-    },
-    {
-      "username": "peni",
-      "password": "peni",
-      "fullname": "Peni Lul",
-      "_id": "u106"
-    },
-    {
-      "username": "tuti",
-      "password": "tuti",
-      "fullname": "Tuti Nopi",
-      "_id": "u107"
-    }
-  ]
+  {
+    "_id": "u101",
+    "username": "puki",
+    "fullname": "Puki Ja",
+    "password": "secret1",
+    "score": 100,
+    "isAdmin": true
+  },
+  {
+    "_id": "u102",
+    "username": "lUli",
+    "fullname": "LUli Pa",
+    "password": "secret2",
+    "score": 100
+  },
+  {
+    "_id": "u103",
+    "username": "nuli",
+    "password": "nuli",
+    "fullname": "NULI Pa",
+    "score": 100
+  },
+  {
+    "username": "sami",
+    "password": "sami",
+    "fullname": "Sami Nana",
+    "_id": "u104"
+  },
+  {
+    "username": "moti",
+    "password": "moti",
+    "fullname": "Moti Ana",
+    "_id": "u105"
+  },
+  {
+    "username": "peni",
+    "password": "peni",
+    "fullname": "Peni Lul",
+    "_id": "u106"
+  },
+  {
+    "username": "tuti",
+    "password": "tuti",
+    "fullname": "Tuti Nopi",
+    "_id": "u107"
+  },
+  {
+    "username": "rivm.,m",
+    "password": "1243435",
+    "fullname": "riv nnj",
+    "_id": "b317D"
+  }
+]

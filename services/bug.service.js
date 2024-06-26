@@ -50,6 +50,11 @@ function getById(bugId) {
 
 function remove(bugId) {
     const idx = bugs.findIndex(bug => bug._id === bugId)
+    if (idx === -1) return Promise.reject('No Such Bug')
+        const bug = bugs[idx]
+        if (bug.creator._id !== loggedinUser._id) {
+            return Promise.reject('Not your bug')
+        }
     bugs.splice(idx, 1)
 
     return _saveBugsToFile()
@@ -60,7 +65,6 @@ function getLabels() {
         const bugsLabels = bugs.reduce((acc, bug) => {
             return [...acc, ...bug.labels]
         }, [])
-        console.log('bugsLabels', bugsLabels);
         return [...new Set(bugsLabels)]
     })
 }
@@ -78,7 +82,7 @@ function save(bugToSave) {
     } else {
         bugToSave._id = utilService.makeId()
         bugToSave.createdAt = Date.now()
-        console.log(bugToSave.createdAt);
+        console.log(bugToSave.createdAt)
         bugs.push(bugToSave)
     }
     return _saveBugsToFile()

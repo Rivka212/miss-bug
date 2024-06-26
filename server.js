@@ -99,7 +99,7 @@ app.post('/api/bug', (req, res) => {
     const loggedinUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedinUser) return res.status(401).send('Cannot add bug')
 
-    const { title, description, severity, labels } = req.body
+    const { title, description, severity,createdAt, labels } = req.body
     const bugToSave = { 
         title: title || '',
         description: description || '',
@@ -203,13 +203,13 @@ app.post('/api/auth/logout', (req, res) => {
 
 //Browser Router
 app.get('/**',(req,res)=>{
-    res.sendFile(path.resolve('publice/index.html'))
+    res.sendFile(path.resolve('public/index.html'))
 })
 
 
 
-const port = 3030
-app.listen(3030, () => loggerService.info(`Server listening on port http://127.0.0.1:${port}/`))
+const PORT = process.env.PORT || 3030
+app.listen(PORT, () => loggerService.info(`Server listening on port http://127.0.0.1:${PORT}/`))
 
 
 

@@ -29,8 +29,6 @@ function getLoginToken(user) {
     return encryptedStr
 }
 
-
-
 function checkLogin({ username, password }) {
     var user = users.find(user => user.username === username)
     if (user)  {

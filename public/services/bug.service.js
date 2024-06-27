@@ -15,18 +15,15 @@ export const bugService = {
 
 
 function query(filterBy = {}) {
-    console.log(filterBy)
     return axios.get(BASE_URL, { params: filterBy })
         .then(res => res.data)
 }
 
 
 function getById(bugId) {
-    // console.log('bugId', bugId);
     return axios.get(BASE_URL + '/' + bugId)
         .then(res => res.data)
 }
-// (BASE_URL + '/' + bugId)
 
 function remove(bugId) {
     return axios.delete(BASE_URL + '/' + bugId)
@@ -34,7 +31,6 @@ function remove(bugId) {
 }
 
 function save(bug) {
-    // console.log('bug',bug);
     if (bug._id) {
         return axios.put(BASE_URL + '/' + bug._id, bug)
             .then(res => res.data)
@@ -45,7 +41,6 @@ function save(bug) {
 }
 
 function getLabels() {
-    // console.log('lable');
     return axios.get(BASE_URL + '/labels').then(res => res.data)
 }
 

@@ -47,7 +47,9 @@ function query() {
 }
 
 function getById(userId) {
+    console.log('userId',userId);
     var user = users.find(user => user._id === userId)
+    // var bugs = bugs.creator._id
     if (!user) return Promise.reject('User not found!')
     user = {
         _id: user._id,

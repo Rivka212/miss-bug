@@ -8,6 +8,7 @@ export const bugService = {
     save,
     getLabels,
     getPageCount,
+    getBugsByUser
 
 }
 const PAGE_SIZE = 4
@@ -40,6 +41,11 @@ function query(filterBy) {
     const startIdx = filterBy.pageIdx * PAGE_SIZE
     filteredBugs = filteredBugs.slice(startIdx, startIdx + PAGE_SIZE)
     return Promise.resolve(filteredBugs)
+}
+
+function getBugsByUser(userId){
+    const bugByUser = bugs.filter(bug => bug.creator && bug.creator._id === userId)
+    return Promise.resolve(bugByUser)
 }
 
 

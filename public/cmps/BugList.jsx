@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 import { userService } from "../services/user.service.js";
 import { BugPreview } from './BugPreview.jsx'
 
-export function BugList({ bugs, onRemoveBug }) {
+export function BugList({ bugs, onRemoveBug, userId }) {
 
   const user = userService.getLoggedinUser()
 
@@ -12,6 +12,7 @@ export function BugList({ bugs, onRemoveBug }) {
     if (!bug.creator) return true
     return  user.isAdmin || bug.creator._id === user._id
 }
+
 
   return (
     <ul className="bug-list">

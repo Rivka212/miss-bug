@@ -158,18 +158,36 @@ app.get('/api/user', (req, res) => {
         })
 })
 
+
 //User READ
+// app.get('/api/user/:userId', (req, res) => {
+//     const { userId } = req.params
+//     userService.getById(userId)
+//         .then((user) => {
+//             res.send(user)
+//         })
+//         .catch((err) => {
+//             console.log('Cannot load user', err)
+//             res.status(400).send('Cannot load user')
+//         })
+// })
+
 app.get('/api/user/:userId', (req, res) => {
     const { userId } = req.params
-    userService.getById(userId)
-        .then((user) => {
-            res.send(user)
+    Promise.all([
+        userService.getById(userId),
+        bugService.getBugsByUser(userId)
+    ])
+        .then(([user, bugs]) => {
+            if (!user) return res.status(404).send('User not found')
+            res.send({ user, bugs })
         })
         .catch((err) => {
-            console.log('Cannot load user', err)
-            res.status(400).send('Cannot load user')
-        })
-})
+            console.error('Cannot load user', err);
+            res.status(500).send('Cannot load user');
+        });
+});
+
 
 //User LOGIN
 app.post('/api/auth/login', (req, res) => {

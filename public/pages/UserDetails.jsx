@@ -1,11 +1,14 @@
 import { userService } from "../services/user.service.js"
+import { bugService } from "../services/bug.service.js"
+
+import { BugList } from '../cmps/BugList.jsx'
 
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
 export function UserDetails() {
 
-    const [user, setUser] = useState(null)
+    const [userData, setUserData] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
 
@@ -13,9 +16,19 @@ export function UserDetails() {
         loadUser()
     }, [params.userId])
 
-    function loadUser() {
+    // function loadUser() {
+    //     userService.get(params.userId)
+    //         .then(setUser)
+    //         .catch(err => {
+    //             console.log('err:', err)
+    //             navigate('/')
+    //         })
+    // }
+
+
+     function loadUser() {
         userService.get(params.userId)
-            .then(setUser)
+            .then(setUserData)
             .catch(err => {
                 console.log('err:', err)
                 navigate('/')
@@ -27,22 +40,19 @@ export function UserDetails() {
     }
 
 
-    if (!user) return <div>Loading...</div>
+    if (!userData) return <div>Loading...</div>
     return (
         <section className="user-details">
-            <h1>User {user.fullname}</h1>
+            <h1>User {userData.user.fullname}</h1>
             <pre>
-                {JSON.stringify(user, null, 2)}
+                {JSON.stringify(userData.user, null, 2)}
             </pre>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Enim rem accusantium, itaque ut voluptates quo? Vitae animi
                 maiores nisi, assumenda molestias odit provident quaerat accusamus,
-                reprehenderit impedit, possimus est ad?</p>
+                reprehenderit impedit, possimus est ad.</p>
+                < BugList bugs={userData.bugs} user={userData.user} />
             <button onClick={onBack} >Back</button>
         </section>
     )
-
-
-
-
 }

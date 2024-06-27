@@ -9,17 +9,25 @@ export const userService = {
     logout,
     get,
     getLoggedinUser,
-    getEmptyCredentials
+    getEmptyCredentials,
 }
 
 
 function get(userId) {
-    return axios.get(BASE_URL + userId).then(res => res.data)
+    return axios.get(BASE_URL + userId)
+    .then(res => {
+        console.log('Request URL:', res.config.url); // להדפיס את ה-URL המלא שנשלח
+        console.log('Request Params:', res.config.params); // להדפיס את הפרמטרים שנשלחו בבקשה
+        return res.data;
+    })
 }
+
+
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
+
 
 function login({ username, password }) {
     return axios.post('/api/auth/login', { username, password })

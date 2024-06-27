@@ -140,5 +140,54 @@
     "createdAt": 1719397915834,
     "labels": [],
     "_id": "fCubc"
+  },
+  {
+    "title": ",n.,m.m",
+    "description": "",
+    "severity": 5,
+    "createdAt": 1719405873333,
+    "labels": [],
+    "_id": "daw3u",
+    "creator": {
+      "_id": "u103",
+      "fullname": "Nuli Pa"
+    }
+  },
+  {
+    "title": "nxknk",
+    "description": "",
+    "severity": 2,
+    "createdAt": 1719405966693,
+    "labels": [],
+    "_id": "4IqFU",
+    "creator": {
+      "_id": "u103",
+      "fullname": "Nuli Pa"
+    }
+  },
+  {
+    "title": "Cannot show detalis",
+    "description": "problem when clicking details",
+    "severity": 20,
+    "createdAt": 1719410388971,
+    "labels": [],
+    "_id": "XKZ98",
+    "creator": {
+      "_id": "u101",
+      "fullname": "Puki Ja",
+      "isAdmin": true
+    }
+  },
+  {
+    "title": "צלצ ",
+    "description": "",
+    "severity": 2,
+    "createdAt": 1719413569650,
+    "labels": [],
+    "_id": "OM7dj",
+    "creator": {
+      "_id": "u103",
+      "fullname": "Nuli Pa"
+    }
   }
 ]

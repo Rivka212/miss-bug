@@ -48,15 +48,15 @@ function getById(bugId) {
     return Promise.resolve(bug)
 }
 
-function remove(bugId,loggedinUser) {
+function remove(bugId, loggedinUser) {
     const idx = bugs.findIndex(bug => bug._id === bugId)
     if (idx === -1) return Promise.reject('No Such Bug')
-        const bug = bugs[idx]
-        if (bug.creator._id !== loggedinUser._id) {
-            return Promise.reject('Not your bug')
-        }
+    const bug = bugs[idx]
+    if (bug.creator._id !== loggedinUser._id) {
+        return Promise.reject('Not your bug')
+    }
     bugs.splice(idx, 1)
-    
+
     return _saveBugsToFile()
 }
 
@@ -75,18 +75,24 @@ function getPageCount() {
     })
 }
 
-function save(bugToSave) {
-    if (bugToSave._id) {
-        const idx = bugs.findIndex(bug => bug._id === bugToSave._id)
-        bugs.splice(idx, 1, bugToSave)
+function save(bug, loggedinUser) {
+    if (bug._id) {
+        const bugToUpdate = bugs.find(currBug => currBug._id === bug._id)
+        // const idx = bugs.findIndex(bug => bug._id === bugToSave._id)
+        // bugs.splice(idx, 1, bugToSave)
+        if (bugToUpdate.creator._id !== loggedinUser._id) {
+            return Promise.reject('Not your bug')
+        }
+        bugToUpdate.title = bug.title
+        bugToUpdate.severity = bug.severity
     } else {
-        bugToSave._id = utilService.makeId()
-        bugToSave.createdAt = Date.now()
-        console.log(bugToSave.createdAt)
-        bugs.push(bugToSave)
+        bug._id = utilService.makeId()
+        bug.createdAt = Date.now()
+        bug.creator = loggedinUser
+        bugs.push(bug)
     }
     return _saveBugsToFile()
-        .then(() => bugToSave)
+        .then(() => bug)
 }
 
 function _saveBugsToFile() {

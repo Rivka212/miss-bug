@@ -285,3 +285,16 @@
 26.6.2024, 14:07:04 - INFO - Server listening on port http://127.0.0.1:3030/
 26.6.2024, 14:07:36 - INFO - Server listening on port http://127.0.0.1:3030/
 26.6.2024, 15:12:38 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:26:46 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:40:05 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:40:53 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:41:34 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:44:33 - ERROR - Cannot add bug | ReferenceError: bugToSave is not defined
+26.6.2024, 15:45:21 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 15:49:40 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 18:05:17 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 18:14:58 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 18:17:28 - INFO - Server listening on port http://127.0.0.1:3030/
+26.6.2024, 18:18:30 - INFO - Server listening on port http://127.0.0.1:3030/
+27.6.2024, 9:27:53 - INFO - Server listening on port http://127.0.0.1:3030/
+27.6.2024, 9:30:19 - INFO - Server listening on port http://127.0.0.1:3030/

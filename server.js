@@ -99,15 +99,15 @@ app.post('/api/bug', (req, res) => {
     const loggedinUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedinUser) return res.status(401).send('Cannot add bug')
 
-    const { title, description, severity,createdAt, labels } = req.body
-    const bugToSave = { 
+    const { title, description, severity, createdAt, labels } = req.body
+    const bugToSave = {
         title: title || '',
         description: description || '',
         severity: +severity || 0,
         createdAt: +createdAt || 0,
         labels: labels || []
-     }
-    bugService.save(bugToSave)
+    }
+    bugService.save(bugToSave, loggedinUser)
         .then(savedBug => res.send(savedBug))
         .catch(err => {
             loggerService.error(`Cannot add bug`, err)
@@ -130,10 +130,10 @@ app.get('/api/bug/:id', (req, res) => {
 
 // Bug DELETE
 app.delete('/api/bug/:id', (req, res) => {
-     const loggedinUser = userService.validateToken(req.cookies.loginToken)
+    const loggedinUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedinUser) return res.status(401).send('Cannot remove bug')
     const { id } = req.params
-    bugService.remove(id,loggedinUser)
+    bugService.remove(id, loggedinUser)
         .then(() => {
             loggerService.info(`Bug ${id} removed`)
 
@@ -160,7 +160,7 @@ app.get('/api/user', (req, res) => {
 
 //User READ
 app.get('/api/user/:userId', (req, res) => {
-    const {userId} = req.params
+    const { userId } = req.params
     userService.getById(userId)
         .then((user) => {
             res.send(user)
@@ -210,7 +210,7 @@ app.post('/api/auth/logout', (req, res) => {
 
 
 //Browser Router
-app.get('/**',(req,res)=>{
+app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })
 

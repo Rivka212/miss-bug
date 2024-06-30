@@ -132,6 +132,7 @@ app.get('/api/bug/:id', (req, res) => {
 app.delete('/api/bug/:id', (req, res) => {
     const loggedinUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedinUser) return res.status(401).send('Cannot remove bug')
+
     const { id } = req.params
     bugService.remove(id, loggedinUser)
         .then(() => {
@@ -191,7 +192,10 @@ app.get('/api/user/:userId', (req, res) => {
 
 //User LOGIN
 app.post('/api/auth/login', (req, res) => {
-    const credentials = req.body
+    const credentials = {
+		username: req.body.username,
+		password: req.body.password,
+	}
     userService.checkLogin(credentials)
         .then(user => {
             if (user) {

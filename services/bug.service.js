@@ -58,7 +58,8 @@ function remove(bugId, loggedinUser) {
     const idx = bugs.findIndex(bug => bug._id === bugId)
     if (idx === -1) return Promise.reject('No Such Bug')
     const bug = bugs[idx]
-    if (bug.creator._id !== loggedinUser._id) {
+    if (!loggedinUser.isAdmin &&
+        bug.creator._id !== loggedinUser._id) {
         return Promise.reject('Not your bug')
     }
     bugs.splice(idx, 1)
@@ -86,11 +87,13 @@ function save(bug, loggedinUser) {
         const bugToUpdate = bugs.find(currBug => currBug._id === bug._id)
         // const idx = bugs.findIndex(bug => bug._id === bugToSave._id)
         // bugs.splice(idx, 1, bugToSave)
-        if (bugToUpdate.creator._id !== loggedinUser._id) {
+        if (!loggedinUser.isAdmin &&
+            bugToUpdate.creator._id !== loggedinUser._id) {
             return Promise.reject('Not your bug')
         }
         bugToUpdate.title = bug.title
         bugToUpdate.severity = bug.severity
+        
     } else {
         bug._id = utilService.makeId()
         bug.createdAt = Date.now()

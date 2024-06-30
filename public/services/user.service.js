@@ -16,12 +16,9 @@ export const userService = {
 function get(userId) {
     return axios.get(BASE_URL + userId)
     .then(res => {
-        console.log('Request URL:', res.config.url); // להדפיס את ה-URL המלא שנשלח
-        console.log('Request Params:', res.config.params); // להדפיס את הפרמטרים שנשלחו בבקשה
-        return res.data;
+        return res.data
     })
 }
-
 
 
 function getLoggedinUser() {

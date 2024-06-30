@@ -68,14 +68,8 @@ export function BugIndex() {
 
 
   function onSetFilterBy(newFilterBy) {
-    console.log(newFilterBy);
     setFilterBy(prevFilter => ({ ...prevFilter, ...newFilterBy }));
   }
-
-  // function handleSetSortBy(newSortBy) {
-  //   console.log('newSortBy 1', newSortBy);
-  //   setFilterBy(prevFilter => ({ ...prevFilter, ...newSortBy }))
-  // }
 
 
   function handleSetSortBy(newSortBy) {

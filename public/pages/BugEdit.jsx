@@ -39,7 +39,6 @@ export function BugEdit() {
             default:
                 break;
         }
-
         setBugToEdit(prevbugToEdit => ({ ...prevbugToEdit, [field]: value }))
     }
 
@@ -49,7 +48,6 @@ export function BugEdit() {
         bugService.save(bugToEdit)
             .then(() => navigate('/bug'))
             .catch(err => console.log('err:', err))
-
     }
 
 

@@ -30,7 +30,9 @@ function getLoginToken(user) {
 }
 
 function checkLogin({ username, password }) {
-    var user = users.find(user => user.username === username)
+    let user = users.find(user => user.username === username)
+    if (!user) return Promise.reject('Invalid username or password')
+
     if (user)  {
         user = {
             _id : user._id,
@@ -73,6 +75,24 @@ function save(user) {
         isAdmin: user.isAdmin,
     }))
 }
+
+// function signup({ fullname, username, password }) {
+//     if(!fullname || !username || !password) return Promise.reject('Incomplete credentails')
+
+// 	let user = {
+// 		_id: utilService.makeId(),
+// 		fullname,
+// 		username,
+// 		password,
+// 	}
+// 	users.push(user)
+
+// 	return _saveUsersToFile()
+//         .then(() => {
+//             delete user.password
+//             return user
+//         })
+// }
 
 function _saveUsersToFile() {
     return new Promise((resolve, reject) => {
